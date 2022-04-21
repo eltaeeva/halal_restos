@@ -41,7 +41,7 @@ def login_user(request):
             messages.info(request, 'Wrong password or username')
             return redirect('login')
     return render(request, 'profileapp/login_page.html')
-
+#ggg
 def register_user(request):
     form = CreateUserForm()
 
