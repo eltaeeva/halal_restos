@@ -12,6 +12,10 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request, 'profileapp/home.html')
 
+@login_required(login_url = 'login')
+def about(request):
+    return render(request, 'profileapp/about_us.html')
+
 @login_required(login_url='login')
 def profile(request):
     if request.method == 'POST':

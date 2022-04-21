@@ -18,10 +18,14 @@
     <header>
         <nav class="navbar">
             <p class="logo">Halal Restos</p>
+                <a class="about_us" href="{% url 'about_us' %}">
+                    <span class="O_nas">О нас</span>
+                </a>
                 <a class="profile-icon-link-container" href="{% url 'profile' %}">
                     <img src="{% static 'images/default.svg' %}" alt="profile-icon">
                     <span class="header-username">{{user}}</span>
                 </a>
+
         </nav>
     </header>
 
