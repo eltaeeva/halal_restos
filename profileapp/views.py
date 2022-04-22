@@ -16,6 +16,14 @@ def index(request):
 def about(request):
     return render(request, 'profileapp/about_us.html')
 
+@login_required(login_url = 'login')
+def restos(request):
+    return render(request, 'profileapp/restos_all.html')
+
+@login_required(login_url = 'login')
+def mosques(request):
+    return render(request, 'profileapp/mosques_all.html')
+
 @login_required(login_url='login')
 def profile(request):
     if request.method == 'POST':

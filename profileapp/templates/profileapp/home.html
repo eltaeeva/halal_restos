@@ -1,7 +1,7 @@
 {% load static %}
 
 {{ '<' }}{{ '!DOCTYPE html>' }}
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -18,8 +18,14 @@
     <header>
         <nav class="navbar">
             <p class="logo">Halal Restos</p>
+            <a class="about_us" href="{% url 'restos_all' %}">
+                    <span class="O_nas">Рестики</span>
+                </a>
+            <a class="about_us" href="{% url 'mosques' %}">
+                    <span class="O_nas">Мечети</span>
+                </a>
                 <a class="about_us" href="{% url 'about_us' %}">
-                    <span class="O_nas">О нас</span>
+                    <span class="O_nas">О проекте</span>
                 </a>
                 <a class="profile-icon-link-container" href="{% url 'profile' %}">
                     <img src="{% static 'images/default.svg' %}" alt="profile-icon">
@@ -46,5 +52,119 @@
     </script>
     {% endif %}
 
-  </body>
+    <style>
+   .transparent75 {
+    filter: alpha(Opacity=45);
+    opacity: 0.45;
+   }
+  </style>
+    <p><img src="images/photo5408874963118700782.jpg" alt="Вттт" width="100%" class="transparent75"></p>
+  <h2><b>Добро пожаловать!</b></h2>
+  <p1 alt="slova">Halal Restos - твой халяльный гид по рестикам)</p1>
+
+    <header2> </header2>
+
+  <section>
+            <div class = "image">
+                <!-- image here -->
+            </div>
+
+            <div class = "content">
+                <h2>Рестораны</h2>
+                <span><!-- line here --></span>
+
+                <p>Рестораны и кафешки сертифицированные официальным сертификатом ДУМК!
+                    <br></br>
+                    <br>На платформе вы можете посмотреть:
+                        <br>* наличие молельной в заведение</br>
+                        * всю контактную информацию
+                    <br>* меню</br></br></p>
+ <a class="restiki" href="{% url 'restos_all' %}">
+                    <div class="restiki-perexod">Смотреть</div>
+                </a>
+            </div>
+        </section>
+
+  <header3> </header3>
+
+  <section alt="mosques_sec">
+
+            <div class = "content_mosq">
+                <h2>Мечети</h2>
+                <span><!-- line here --></span>
+
+                <p>Вся информация о мечетях города Нур-султан!
+                    <br></br>
+                    <br>* адрес</br>
+                    * контактные данные
+                    <br>* и вся важная информация</br></p>
+ <a class="mosques" href="{% url 'mosques' %}">
+                    <div class="mosque-perexod">Смотреть</div>
+                </a>
+            </div>
+      <div class = "image_mosq">
+                <!-- image here -->
+            </div>
+
+        </section>
+
+    <header4> </header4>
+
+  <footer class="footer-distributed">
+
+			<div class="footer-left">
+
+				<h3>Halal Restos</h3>
+
+				<p class="footer-links">
+					<a href="{% url 'home' %}" class="link-1">Главная</a>
+
+					<a href="{% url 'restos_all' %}">Рестораны</a>
+
+					<a href="{% url 'mosques' %}">Мечети</a>
+					<a href="#">О нас</a>
+				</p>
+
+				<p class="footer-company-name">Halal Restos © 2022</p>
+			</div>
+
+			<div class="footer-center">
+
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p><span>Нур-Султан</span>Казахстан</p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>+7-777-083-11-21</p>
+				</div>
+
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@company.com">halal_restos@company.com</a></p>
+				</div>
+
+			</div>
+
+			<div class="footer-right">
+
+				<p class="footer-company-about">
+					<span>О проекте</span>
+					Halal restos - самый первый цифровой гид по Халяльным заведения в Казахстане.
+				</p>
+
+				<div class="footer-icons">
+
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="https://instagram.com/anel.yah?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram"></i></a>
+					<a href="https://t.me/an3lya"><i class="fa fa-telegram"></i></a>
+
+				</div>
+
+			</div>
+
+		</footer>
+
 </html>

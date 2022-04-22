@@ -6,8 +6,16 @@
 <link rel="stylesheet" href="{% static 'css/about_us.css' %}">
 <header>
         <nav class="navbar">
-            <a href="{% url 'home'%}" class="logo">HalalRestos</a>
-            <p class="about_us">О нас</p>
+            <a href="{% url 'home'%}" class="logo">Halal Restos</a>
+			<a class="about_us" href="{% url 'restos_all' %}">
+                    <span class="O_nas">Рестики</span>
+                </a>
+            <a class="about_us" href="{% url 'mosques' %}">
+                    <span class="O_nas">Мечети</span>
+                </a>
+            <a class="about_us" href="#">
+                    <span class="O_nas">О проекте</span>
+                </a>
                 <a class="profile-icon-link-container" href="{% url 'profile' %}">
                     <img src="{% static 'images/default.svg' %}" alt="profile-icon">
                     <span class="header-username">{{user}}</span>
@@ -38,6 +46,8 @@
             </div>
         </section>
 
+		<header1> </header1>
+
     <footer class="footer-distributed">
 
 			<div class="footer-left">
@@ -47,11 +57,11 @@
 				<p class="footer-links">
 					<a href="{% url 'home' %}" class="link-1">Главная</a>
 
-					<a href="#">Рестораны</a>
+					<a href="{% url 'restos_all' %}">Рестораны</a>
 
-					<a href="#">Мечети</a>
+					<a href="{% url 'mosques' %}">Мечети</a>
 
-					<a href="#">О нас</a>
+					<a href="#">О проекте</a>
 				</p>
 
 				<p class="footer-company-name">Halal Restos © 2022</p>
@@ -79,7 +89,7 @@
 			<div class="footer-right">
 
 				<p class="footer-company-about">
-					<span>О нас</span>
+					<span>О проекте</span>
 					Halal restos - самый первый цифровой гид по Халяльным заведения в Казахстане.
 				</p>
 

@@ -288,3 +288,10 @@ section{
 	}
 
 }
+
+header1 {
+    background-color: #EFEFEF;
+    height: 3em;
+    display: flex;
+    align-items: center;
+}
