@@ -1,0 +1,64 @@
+{% load static %}
+
+{{ '<' }}{{ '!DOCTYPE html>' }}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <title>Home</title>
+  </head>
+  <body>
+
+  <header>
+        <nav class="navbar">
+            <a href="{% url 'home'%}" class="logo">Halal Restos</a>
+            <a class="about_us" href="{% url 'restos_all' %}">
+                    <span class="O_nas">Рестики</span>
+                </a>
+            <a class="about_us" href="{% url 'mosques' %}">
+                    <span class="O_nas">Мечети</span>
+                </a>
+                <a class="about_us" href="{% url 'about_us' %}">
+                    <span class="O_nas">О проекте</span>
+                </a>
+                <a class="profile-icon-link-container" href="{% url 'profile' %}">
+                    <img src="{% static 'images/default.svg' %}" alt="profile-icon">
+                    <span class="header-username">{{user}}</span>
+                </a>
+        </nav>
+    </header>
+
+  <h1>Mosque details page</h1>
+
+    {% if messages %}
+    <div class="notification-container">
+        <div class="notification">
+            {% for message in messages %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+            <img id='cross' src="{% static 'images/close.png' %}" width="15px" height="15px" alt="">
+        </div>
+    </div>
+    <script>
+        var cross = document.getElementById('cross')
+        cross.addEventListener('click', ()=> {
+            document.getElementsByClassName('notification-container')[0].style.display = 'none';
+        })
+    </script>
+    {% endif %}
+
+    <style>
+   .transparent75 {
+    filter: alpha(Opacity=45);
+    opacity: 0.45;
+   }
+  </style>
+  </body>
+</html>

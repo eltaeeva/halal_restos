@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.db import models
 
+import database
+from database.models import Restaurants, Mosque
 from .forms import CreateUserForm, ProfileForm
 
 from django.contrib import messages
@@ -18,11 +21,21 @@ def about(request):
 
 @login_required(login_url = 'login')
 def restos(request):
-    return render(request, 'profileapp/restos_all.html')
+    restos = Restaurants.objects.all()
+    return render(request, 'profileapp/restos_all.html', {'restos': restos})
+
+@login_required(login_url = 'login')
+def resto_detail(request):
+    return render(request, 'profileapp/resto_detail.html')
 
 @login_required(login_url = 'login')
 def mosques(request):
-    return render(request, 'profileapp/mosques_all.html')
+    mosques = Mosque.objects.all()
+    return render(request, 'profileapp/mosques_all.html', {'mosques': mosques})
+
+@login_required(login_url = 'login')
+def mosque_details(request):
+    return render(request, 'profileapp/mosque_details.html')
 
 @login_required(login_url='login')
 def profile(request):

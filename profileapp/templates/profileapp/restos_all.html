@@ -1,4 +1,445 @@
+{% load static %}
+
 {{ '<' }}{{ '!DOCTYPE html>' }}
 <html lang="en">
-<h1>All restos page</h1>
-<html>
+
+<link rel="stylesheet" href="{% static 'css/restis_all.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+
+<header>
+        <nav class="navbar">
+            <a href="{% url 'home'%}" class="logo">Halal Restos</a>
+			<a class="about_us" href="#">
+                    <span class="O_nas">Рестики</span>
+                </a>
+            <a class="about_us" href="{% url 'mosques' %}">
+                    <span class="O_nas">Мечети</span>
+                </a>
+            <a class="about_us" href="{% url 'about_us' %}">
+                    <span class="O_nas">О проекте</span>
+                </a>
+                <a class="profile-icon-link-container" href="{% url 'profile' %}">
+                    <img src="{% static 'images/default.svg' %}" alt="profile-icon">
+                    <span class="header-username">{{user}}</span>
+                </a>
+        </nav>
+</header>
+
+<h2><b>Рестораны</b></h2>
+
+<section class="container10">
+    <form>
+        <i class="fas fa-search"></i>
+        <input type="text" name="" id="search-item" placeholder="Поиск..." onclick="search()">
+    </form>
+</section>
+
+<script src="/static/js/search.js"></script>
+<!--<div class="container10">-->
+<!--      <form action="/" method="GET" class="form">-->
+<!--        <input type="search" placeholder="Поиск..." class="search-field" />-->
+<!--        <button type="submit" class="search-button">-->
+<!--          <img src="/images/search.png">-->
+<!--        </button>-->
+<!--      </form>-->
+<!--    </div>-->
+<style>
+.card-image{
+background-color: white;
+height: 170px;
+margin-bottom: 15px;
+background-size: cover;
+border-radius: 15px 15px 0 0 ;
+}
+  </style>
+
+<body>
+<div class="resto-list" id="resto-list">
+<section class="container">
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/photo5363917079415208865.jpg');" class="card-image">
+        </div>
+        <h3>Bosna Steak House</h3>
+        <p>Турецкая кухня</p>
+        <p>Қасым Аманжолов, 24</p>
+        <p>с 10:00 до 24:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/photo5363917079415208863_XmBOxan.jpg');" class="card-image">
+        </div>
+        <h3>Maki Maki</h3>
+        <p>Японская кухня</p>
+        <p>Петрова, 24a/1</p>
+        <p>с 10:00 до 04:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/divan_photo.JPG');" class="card-image">
+        </div>
+        <h3>Divan</h3>
+        <p>Турецкая кухня</p>
+        <p>Дінмұхамед Қонаев, 14</p>
+        <p>с 10:00 до 22:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/monocle.jpg');" class="card-image">
+        </div>
+        <h3>Monocle</h3>
+        <p>Fusion кухня</p>
+        <p>проспект Ұлы Дала, 7Б</p>
+        <p>с 10:00 до 22:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+</section>
+<section class="container2">
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/dami_ph.jpg');" class="card-image">
+        </div>
+        <h3>Dami</h3>
+        <p>Восточная кухня, Турецкая кухня</p>
+        <p>Түркістан, 34</p>
+        <p>с 09:00 до 24:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/lavash_ph.png');" class="card-image">
+        </div>
+        <h3>Lavash Food</h3>
+        <p>Турецкая кухня, Восточная кухня</p>
+        <p>пр. Мәңгілік Ел, 52 блок B2</p>
+        <p>круглосуточно</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/izumi_ph.png');" class="card-image">
+        </div>
+        <h3>Izumi Sushi</h3>
+        <p>Японская кухня</p>
+        <p>пр. Бауыржан Момышұлы, 2/8</p>
+        <p>с 10:00 до 22:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/mado_ph.jpg');" class="card-image">
+        </div>
+        <h3>Mado</h3>
+        <p>Турецкая кухня</p>
+        <p>Дінмұхамед Қонаев, 14</p>
+        <p>с 10:00 до 24:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+</section>
+<section class="container3">
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/кофеин_фото.png');" class="card-image">
+        </div>
+        <h3>Coffee Inn</h3>
+        <p>Миксовая кухня</p>
+        <p>Қасым Аманжолов, 32/1</p>
+        <p>с 08:00 до 23:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/hot_spot_ph.jpg');" class="card-image">
+        </div>
+        <h3>Hot Spot Doner Shop</h3>
+        <p>Фастфуд</p>
+        <p>пр. Республики, 19</p>
+        <p>круглосуточно</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/okadzaki_ph.png');" class="card-image">
+        </div>
+        <h3>Okadzaki</h3>
+        <p>Японская кухня</p>
+        <p>Мангилик ел, 21</p>
+        <p>с 09:00 до 01:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/mastercof_ph.jpg');" class="card-image">
+        </div>
+        <h3>Master Coffee</h3>
+        <p>Миксовая кухня</p>
+        <p>пр. Қабанбай батыр, 6/1</p>
+        <p>с 08:00 до 20:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+</section>
+<section class="container4">
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/митпоинт_фот.jpg');" class="card-image">
+        </div>
+        <h3>Meat Point</h3>
+        <p>Турецкая кухня</p>
+        <p>пр. Ұлы Дала, 11/3</p>
+        <p>с 09:00 до 24:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/unaidyy_ph.jpg');" class="card-image">
+        </div>
+        <h3>Unaidy</h3>
+        <p>Восточная и Европейская кухня</p>
+        <p>Дінмұхамед Қонаев, 2</p>
+        <p>с 08:00 до 24:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/ponchik_ph.png');" class="card-image">
+        </div>
+        <h3>Ponchik</h3>
+        <p>Восточная кухня</p>
+        <p>Туркистан, 28/2</p>
+        <p>с 10:00 до 22:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/habibi_ph.jpg');" class="card-image">
+        </div>
+        <h3>Habibi - Halal</h3>
+        <p>Восточная и Европейская кухня</p>
+        <p>Кошкарбаева, 37</p>
+        <p>с 11:00 до 23:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+</section>
+<section class="container5">
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/sosedi_ph.jpg');" class="card-image">
+        </div>
+        <h3>Sosedi</h3>
+        <p>Восточная и Европейская кухня</p>
+        <p>Кошкарбаева, 10/1</p>
+        <p>с 09:00 до 23:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/halvaa_ph.png');" class="card-image">
+        </div>
+        <h3>Pahlava</h3>
+        <p>Восточная и Европейская кухня</p>
+        <p>Күйші Дина, 13</p>
+        <p>с 10:00 до 23:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/baraqat_ph.jpeg');" class="card-image">
+        </div>
+        <h3>Baraqat</h3>
+        <p>Восточная и Европейская кухня</p>
+        <p>пр. Нұрғиса Тілендиев, 15</p>
+        <p>с 10:00 до 21:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/afsona_ph.jpg');" class="card-image">
+        </div>
+        <h3>Afsona</h3>
+        <p>Восточная кухня</p>
+        <p>Сығанақ, 60/5</p>
+        <p>с 10:00 до 22:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+</section>
+<section class="container6">
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/angel_ph.png');" class="card-image">
+        </div>
+        <h3>Angel-in-us Coffee</h3>
+        <p>Южно-корейская кухня</p>
+        <p>пр. Қабанбай батыр, 62</p>
+        <p>с 10:00 до 22:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/taksim_ph.jpg');" class="card-image">
+        </div>
+        <h3>Taksim</h3>
+        <p>Восточная кухня</p>
+        <p>пр. Қабанбай батыр, 62</p>
+        <p>с 10:00 до 22:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/capitol_ph.jpg');" class="card-image">
+        </div>
+        <h3>Capitol</h3>
+        <p>Турецкая кухня</p>
+        <p>Сығанақ, 62/3</p>
+        <p>круглосуточно</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/hani_ph_1Z7IITL.jpg');" class="card-image">
+        </div>
+        <h3>Hani</h3>
+        <p>Кондитерская</p>
+        <p>Иманбаевой, 7а</p>
+        <p>с 09:00 до 22:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+</section>
+<section class="container7">
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/tagam1_ph.jpg');" class="card-image">
+        </div>
+        <h3>Tagam</h3>
+        <p>Восточная и Европейская кухня</p>
+        <p>Дінмұхамед Қонаев, 14</p>
+        <p>с 08:00 до 24:00</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <p style ="background-image: url('/images/каганат1.jpg');" class="card-image">
+        </div>
+        <h3>Qaganat</h3>
+        <p>Восточная кухня</p>
+        <p>пр. Тәуелсіздік, 8/1</p>
+        <p>круглосуточно</p>
+        <a class="detail" href="#">
+                    <span class="O_nas">Смотреть></span>
+                </a>
+    </div>
+</section>
+</div>
+
+<header1> </header1>
+    <footer class="footer-distributed">
+
+			<div class="footer-left">
+
+				<h3>Halal Restos</h3>
+
+				<p class="footer-links">
+					<a href="{% url 'home' %}" class="link-1">Главная</a>
+
+					<a href="#">Рестораны</a>
+
+					<a href="{% url 'mosques' %}">Мечети</a>
+
+					<a href="{% url 'about_us' %}">О проекте</a>
+				</p>
+
+				<p class="footer-company-name">Halal Restos © 2022</p>
+			</div>
+
+			<div class="footer-center">
+
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p><span>Нур-Султан</span>Казахстан</p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>+7-777-083-11-21</p>
+				</div>
+
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@company.com">halal_restos@company.com</a></p>
+				</div>
+
+			</div>
+
+			<div class="footer-right">
+
+				<p class="footer-company-about">
+					<span>О проекте</span>
+					Halal restos - самый первый цифровой гид по Халяльным заведения в Казахстане.
+				</p>
+
+				<div class="footer-icons">
+
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="https://instagram.com/anel.yah?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram"></i></a>
+					<a href="https://t.me/an3lya"><i class="fa fa-telegram"></i></a>
+
+				</div>
+
+			</div>
+
+		</footer>
+</body>
+</html>
