@@ -1,7 +1,7 @@
 {% load static %}
 
 {{ '<' }}{{ '!DOCTYPE html>' }}
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -12,7 +12,21 @@
       <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
     <link rel="stylesheet" href="{% static 'css/mosques_all.css' %}">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
 
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{%static 'css/style.css' %}" rel="stylesheet">
     <title>Home</title>
   </head>
   <body>
@@ -165,140 +179,30 @@ header2 {
   </div>
 
   <div class="container3">
-      <form action="/" method="GET" class="form">
-        <input type="search" placeholder="Search" class="search-field" onkeyup="search()"/>
+      <form action="{% url 'search' %}" method="post" class="form">
+          {% csrf_token %}
+        <input type="text" name="search_field" placeholder="Search" class="search-field" onkeyup="search()"/>
         <button type="submit" class="search-button">
           <i class="fas fa-search"></i>
         </button>
       </form>
     </div>
-
-  <section class="container">
-{#   {{ mosques.1.mosque_address }}#}
-    <div class="card">
-        <div class="card-image">
-            <p style ="background-image: url('/images/хазретсултан.jpg');" class="card-image">
+<div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            {% for mos in mosques %}
+            <div class="col-lg-4 col-md-6 pb-1">
+                <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px; height: 500px;" >
+                   <a href="{% url 'mosque_detail' %}" class="cat-img position-relative overflow-hidden mb-3">
+                       <p class="text-right">{{mos.mosque_name}}</p>
+                   </a>
+                    <a href="{% url 'mosque_detail' %}" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid" src="{{mos.mosque_photo.url}}" alt=""  style="height: 300px;" >
+                    </a>
+                    <h5 class="font-weight-semi-bold m-0"> <center> {{mos.mosque_address}}</center></h5>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        <h3>Мечеть "Хазрет Султан"</h3>
-        <p>кругласуточно</p>
-        <p>проспект Тәуелсіздік, 48"</p>
-        <a class="detail" href="{% url 'mosque_detail' %}">
-                    <span class="O_nas">Смотреть</span>
-                </a>
-    </div>
-
-      <div class="card">
-        <div class="card-image">
-            <p style ="background-image: url('/images/ырыскелдыкажыы.jpeg');" class="card-image">
-        </div>
-        <h3>Мечеть "Ырыскелді қажы"</h3>
-        <p>5:00 - 21:20</p>
-        <p>Ермек Серкебаев, 2</p>
-        <a class="detail" href="{% url 'mosque_detail' %}">
-            <span class="O_nas">Смотреть</span>
-        </a>
-    </div>
-
-      <div class="card">
-        <div class="card-image">
-            <p style ="background-image: url('/images/акмешит.jpg');" class="card-image">
-        </div>
-        <h3>Мечеть "Ақ мешіт"</h3>
-        <p>круглосуточно</p>
-        <p>Қобыланды батыр, 3</p>
-        <a class="detail" href="{% url 'mosque_detail' %}">
-                    <span class="O_nas">Смотреть</span>
-                </a>
-    </div>
-
-      <div class="card">
-        <div class="card-image">
-            <p style ="background-image: url('/images/рахимкызы.jpg');" class="card-image">
-        </div>
-        <h3>Мечеть им. "Раисы Ана"</h3>
-        <p>круглосуточно</p>
-        <p>Вольфганга Гете, 12</p>
-        <a class="detail" href="{% url 'mosque_detail' %}">
-                    <span class="O_nas">Смотреть</span>
-                </a>
-    </div>
-  </section>
-
-  <section class="container2">
-    <div class="card">
-        <div class="card-image">
-            <p style ="background-image: url('/images/альфарабии.jpg');" class="card-image">
-        </div>
-        <h3>Мечеть им. "Аль-Фараби"</h3>
-        <p>4:30 - 22:00</p>
-        <p>Проспект Қабанбай батыр, 36</p>
-        <a class="detail" href="{% url 'mosque_detail' %}">
-                    <span class="O_nas">Смотреть</span>
-                </a>
-    </div>
-
-      <div class="card">
-        <div class="card-image">
-            <p style ="background-image: url('/images/садвакас.jpg');" class="card-image">
-        </div>
-        <h3>Мечеть им."Садвакаса Кажи"</h3>
-        <p>5:00 - 22:00</p>
-        <p>Аймаутова, 16</p>
-        <a class="detail" href="{% url 'mosque_detail' %}">
-                    <span class="O_nas">Смотреть</span>
-                </a>
-    </div>
-
-      <div class="card">
-        <div class="card-image">
-            <p style ="background-image: url('/images/альжанана.jpg');" class="card-image">
-        </div>
-        <h3>Мечеть "Альжан-Ана"</h3>
-        <p>круглосуточно</p>
-        <p>Проспект Қабанбай батыр, 38</p>
-        <a class="detail" href="{% url 'mosque_detail' %}">
-                    <span class="O_nas">Смотреть</span>
-                </a>
-    </div>
-
-      <div class="card">
-        <div class="card-image">
-            <p style ="background-image: url('/images/альгани.jpg');" class="card-image">
-        </div>
-        <h3>Мечеть "Аль-Гани"</h3>
-        <p>6:30 - 21:00</p>
-        <p>Проспект Қабанбай батыр, 38</p>
-        <a class="detail" href="{% url 'mosque_detail' %}">
-                    <span class="O_nas">Смотреть</span>
-                </a>
-    </div>
-  </section>
-
-  <section class="container2">
-    <div class="card">
-        <div class="card-image">
-            <p style ="background-image: url('/images/ассалам4.jpg');" class="card-image">
-        </div>
-        <h3>Мечеть "Ас-Салям"</h3>
-        <p>6:30 - 21:00</p>
-        <p>Маяковского, 7/1</p>
-        <a class="detail" href="{% url 'mosque_detail' %}">
-                    <span class="O_nas">Смотреть</span>
-                </a>
-    </div>
-
-      <div class="card">
-        <div class="card-image">
-            <p style ="background-image: url('/images/абишата.jpg');" class="card-image">
-        </div>
-        <h3>Мечеть им. Абиш Ата</h3>
-        <p>круглосуточно</p>
-        <p>Каркабат, 2</p>
-        <a class="detail" href="{% url 'mosque_detail' %}">
-                    <span class="O_nas">Смотреть</span>
-                </a>
-    </div>
-  </section>
     </div>
 
   <header2> </header2>

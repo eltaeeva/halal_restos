@@ -12,4 +12,6 @@ urlpatterns = [
     path('mosques_all/', views.mosques, name = 'mosques'),
     path('mosque_detail/', views.mosque_details, name='mosque_detail'),
     path('resto_detail/', views.resto_detail, name = 'resto_detail'),
+    path('search/', views.SearchView.as_view(), name='search'),
+    path('search/success/<str:text>', views.SearchSuccessView.as_view(), name='search_success')
 ]
