@@ -2,26 +2,46 @@
 
 {{ '<' }}{{ '!DOCTYPE html>' }}
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css'%} ">
     <link rel="stylesheet" href="{% static 'css/profile.css'%} ">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
 
     <title>HalalRestos</title>
-  </head>
-  <body>
-
+</head>
+<body>
     <header>
         <nav class="navbar">
-            <a href="{% url 'home'%}" class="logo">HalalRestos</a>
-                <a class="profile-icon-link-container" href="{% url 'login' %}">
-                    <div class="header-logout">Выход</div>
-                </a>
+            <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="/images/HalalRestos.png" width="250" height="60" class="d-inline-block align-top" alt="">
+            </a>
+            <a class="about_us" href="{% url 'restos_all' %}">
+                    <span class="O_nas">Рестораны</span>
+            </a>
+            <a class="about_us" href="{% url 'mosques' %}">
+                    <span class="O_nas">Мечети</span>
+            </a>
+            <a class="about_us" href=#>
+                    <span class="O_nas">Время намаза</span>
+            </a>
+            <a class="about_us" href="{% url 'about_us' %}">
+                    <span class="O_nas">О проекте</span>
+            </a>
+            <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">{{user.profile.name}} {{user.profile.last_name}}</button>
+                    <div id="myDropdown" class="dropdown-content">
+                    <a href="#">Редактировать профиль</a>
+                    <a href="{% url 'post_favourite_list' %}">Сохранённые</a>
+                    <a href="{% url 'login' %}">Выход</a>
+                    </div>
+            </div>
         </nav>
     </header>
 
@@ -29,12 +49,10 @@
             <form class = 'container' action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="profile-photo-container profile-photo-form-container">
-                    <p class="profile-page-heading">Редактировать профиль</p>
+                    <p class="profile-page-heading">ДАННЫЕ</p>
                     <img src="{{user.profile.profile_img.url}}" alt="user-image" width="" srcset="">
                     {{form.profile_img}}
-
                 </div>
-
 
                 <div class="user-content-container user-profile-form-container">
                     <ul>
@@ -55,9 +73,585 @@
                 </div>
             </form>
     </main>
+</body>
+<footer class="footer-distributed">
 
-    <script>
+    <div class="footer-left">
 
+        <h3>Halal Restos</h3>
+
+				<p class="footer-links">
+					<a href="{% url 'home' %}" class="link-1">Главная</a>
+
+					<a href="{% url 'restos_all' %}">Рестораны</a>
+
+					<a href="{% url 'mosques' %}">Мечети</a>
+					<a href="#">О нас</a>
+				</p>
+
+				<p class="footer-company-name">Halal Restos © 2022</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>Нур-Султан</span>Казахстан</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+7-777-083-11-21</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:halal_restos@company.com">halal_restos@company.com</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>О проекте</span>
+            Halal restos - самый первый цифровой гид по Халяльным заведения в Казахстане.
+        </p>
+
+        <div class="footer-icons">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="https://instagram.com/anel.yah?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram"></i></a>
+            <a href="https://t.me/an3lya"><i class="fa fa-telegram"></i></a>
+        </div>
+    </div>
+</footer>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Nunito;
+}
+
+body {
+    background-color: #EFEFEF;
+}
+
+header {
+    background-color: #444444;
+    height: 5em;
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    margin: auto 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about_us {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    align-items: left;
+}
+
+a {
+    text-decoration: none;
+}
+
+#note {
+    position: absolute;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fde073;
+    text-align: center;
+    line-height: 2.5;
+    overflow: hidden;
+    -webkit-box-shadow: 0 0 5px black;
+    -moz-box-shadow:    0 0 5px black;
+    box-shadow:         0 0 5px black;
+}
+
+.profile-icon-link-container div{
+    display: block;
+    background-color: #D51B1B;
+    padding: .3em .5em;
+    border-radius: 2px;
+    color: white;
+}
+
+
+.profile-page-heading {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.profile-photo-form-container {
+    width: 50%;
+}
+
+/* Main Container css */
+
+.main-container {
+    width: 50%;
+    background-color: white;
+    margin: 10% auto;
+    border-radius: 2em;
+    padding: 2em 2em;
+}
+
+.container {
+    display: flex;
+    margin: 2em 2em;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-photo-container {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo-container img {
+    width: 10em;
+    height: 10em;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: .5em auto;
+}
+
+.user-content-container{
+    display: flex;
+    flex-direction: column;
+    margin: 2em;
+    padding-left: 2em;
+}
+
+.username {
+    font-size: 2em;
+    font-weight: 600;
+    margin: 5px 0;
+}
+
+.user-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.876);
+    margin: 5px 0;
+    width: 80%;
+    line-height: 1.3em
+}
+
+.user-desc {
+    font-size: .9em;
+    color: #4B4B4B;
+    margin: 4px auto 4px 0;
+}
+
+.profile-edit-link-container {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.profile-edit-link-container a {
+    text-decoration: none;
+    color: #1a0dab;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .container {
+        display: block;
+        font-size: 18px;
+    }
+
+    .main-container {
+        padding: 2em 1.5em;
+    }
+
+    .user-content-container {
+        padding-left: 0;
+        width: 60%;
+    }
+
+    .profile-photo-container {
+        width: 100%;
+        margin: auto;
+        width: 30%;
+    }
+}
+
+  @media only screen and (max-width: 700px) {
+    .user-content-container {
+        margin: 2em auto;
+    }
+
+    .user-title {
+        width: 100%;
+    }
+
+    .main-container {
+        margin: 10% auto;
+        width: 75%;
+    }
+
+    .header-username {
+        display: none;
+    }
+
+    .profile-photo-container {
+        width: 100%;
+    }
+  }
+
+  @media only screen and (min-width: 1200px){
+
+  }
+
+.footer-distributed{
+	background: #666;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	text-align: left;
+	font: bold 16px sans-serif;
+	padding: 55px 50px;
+}
+
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.footer-distributed .footer-left{
+	width: 40%;
+}
+
+.footer-distributed h3{
+	color:  #ffffff;
+	font: normal 36px 'Open Sans';
+	margin: 0;
+}
+
+.footer-distributed h3 span{
+	color:  lightseagreen;
+	font-size: 30px
+}
+
+.footer-distributed .footer-links{
+	color:  #ffffff;
+	margin: 20px 0 12px;
+	padding: 0;
+}
+
+.footer-distributed .footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+    font-weight:400;
+	text-decoration: none;
+	color:  inherit;
+}
+
+.footer-distributed .footer-company-name{
+	color:  #222;
+	font-size: 14px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.footer-distributed .footer-center{
+	width: 35%;
+}
+
+.footer-distributed .footer-center i{
+	background-color:  #33383b;
+	color: #ffffff;
+	font-size: 25px;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 42px;
+	margin: 10px 15px;
+	vertical-align: middle;
+}
+
+.footer-distributed .footer-center i.fa-envelope{
+	font-size: 17px;
+	line-height: 38px;
+}
+
+.footer-distributed .footer-center p{
+	display: inline-block;
+	color: #ffffff;
+    font-weight:400;
+	vertical-align: middle;
+	margin:0;
+}
+
+.footer-distributed .footer-center p span{
+	display:block;
+	font-weight: normal;
+	font-size:14px;
+	line-height:2;
+}
+
+.footer-distributed .footer-center p a{
+	color:  lightseagreen;
+	text-decoration: none;;
+}
+
+.footer-distributed .footer-links a:before {
+  content: "|";
+  font-weight:300;
+  font-size: 20px;
+  left: 0;
+  color: #fff;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.footer-distributed .footer-links .link-1:before {
+  content: none;
+}
+
+.footer-distributed .footer-right{
+	width: 20%;
+}
+
+.footer-distributed .footer-company-about{
+	line-height: 20px;
+	color:  #92999f;
+	font-size: 13px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.footer-distributed .footer-company-about span{
+	display: block;
+	color:  #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.footer-distributed .footer-icons{
+	margin-top: 25px;
+}
+
+.footer-distributed .footer-icons a{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	background-color:  #33383b;
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+
+	margin-right: 3px;
+	margin-bottom: 5px;
+}
+
+@media (max-width: 880px) {
+	.footer-distributed{
+		font: bold 14px sans-serif;
+	}
+
+	.footer-distributed .footer-left,
+	.footer-distributed .footer-center,
+	.footer-distributed .footer-right{
+		display: block;
+		width: 100%;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+
+	.footer-distributed .footer-center i{
+		margin-left: 0;
+	}
+}
+
+.profile-photo-container button{
+    margin-top: 1.5em;
+    width: 70%;
+    padding: .8em;
+    background-color: #FFD13A;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+#id_profile_img {
+    width: 70% - 1.6em;
+    padding: .8em .8em;
+    margin-top: 1.5em;
+    width: 70%;
+    padding: .8em;
+    background-color: #FFD13A;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.user-profile-form-container {
+    width: 60%;
+    margin: 2em;
+    padding: 0;
+}
+
+.user-content-container ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+
+.user-content-container ul  li {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+
+.user-profile-form-container label {
+    font-size: larger;
+    width: 100%;
+    margin: .5em auto .3em 0;
+}
+
+.user-profile-form-container input {
+    width: 100%-14px;
+    height: 2.5em;
+    border-radius: 3px;
+    border: solid #707070 1px;
+    margin: .1em 0;
+    padding: 0 7px;
+}
+
+.profile-save-button {
+    margin-top: 1.5em;
+    width: 40%;
+    padding: .8em;
+    background-color: #FFD13A;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .container {
+        display: block;
+        margin-left: .1em;
+        margin-right: .1em;
+    }
+
+    .main-container {
+        padding: 2em 1.5em;
+
+    }
+
+    .user-profile-form-container {
+        padding-left: 0;
+        margin: 2em auto;
+        width: 90%;
+    }
+
+    .profile-photo-container {
+        width: 100%;
+    }
+  }
+
+
+  @media only screen and (max-width: 600px) {
+    .user-profile-form-container {
+        margin: 2em auto;
+    }
+
+    .user-title {
+        width: 100%;
+    }
+
+    .main-container {
+        margin: 10% auto;
+        width: 80%;
+    }
+
+    .header-username {
+        display: none;
+    }
+
+    .profile-photo-container {
+        width: 100%;
+    }
+  }
+
+.dropbtn {
+    background-color: #444444;
+    color: white;
+    padding: 16px;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #444444;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.show {display:block;}
+
+</style>
+<script>
     var id_name = document.getElementById('id_name')
     var id_title = document.getElementById('id_title')
     var id_desc = document.getElementById('id_desc')
@@ -65,7 +659,22 @@
     id_title.placeholder = 'Your Title'
     id_desc.placeholder = 'Description'
 
-    </script>
+    function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
-  </body>
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 </html>

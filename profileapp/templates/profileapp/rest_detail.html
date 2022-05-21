@@ -1,4 +1,747 @@
+{% load static %}
+
 {{ '<' }}{{ '!DOCTYPE html>' }}
-<html lang="en">
-<h1>All mosques page</h1>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/reviews.css' %}">
+    <link rel="stylesheet" href="{% static 'css/template.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Home</title>
+</head>
+
+<header>
+        <nav class="navbar">
+            <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="/images/HalalRestos.png" width="250" height="60" class="d-inline-block align-top" alt="">
+            </a>
+            <a class="about_us" href="{% url 'restos_all' %}">
+                    <span class="O_nas">Рестораны</span>
+            </a>
+            <a class="about_us" href="{% url 'mosques' %}">
+                    <span class="O_nas">Мечети</span>
+            </a>
+            <a class="about_us" href=#>
+                    <span class="O_nas">Время намаза</span>
+            </a>
+            <a class="about_us" href="{% url 'about_us' %}">
+                    <span class="O_nas">О проекте</span>
+            </a>
+            <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">{{user.profile.name}} {{user.profile.last_name}}</button>
+                    <div id="myDropdown" class="dropdown-content">
+                    <a href="{% url 'profile' %}">Редактировать профиль</a>
+                    <a href="{% url 'post_favourite_list' %}">Сохранённые</a>
+                    <a href="{% url 'login' %}">Выход</a>
+                    </div>
+            </div>
+        </nav>
+</header>
+<body>
+  <div class="content_product_detail">
+        <div id="detail_photo">
+            <section id="details">
+                <div class="col-md-6 text-center mb-5 mb-md-0">
+                    <img src="{{rest.resto_photo.url}}" alt="img2" style="border-radius: 8px; margin-top: 150px; margin-left: 40px; padding: 0px; width: 600px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                </div>
+                <div class = "content">
+                    <h5>{{rest.resto_name}}</h5>
+                    <p class="mb-4">{{rest.resto_description}}</p>
+                    <p>Вид кухни: {{rest.kuhnya}}</p>
+                    <p>Молельная: {{rest.namazhana}}</p>
+                    <p>Адрес: {{rest.resto_address}}</p>
+                    <p>Время работы: {{rest.time}}</p>
+                    <p>Контакты: {{rest.contacts}}</p>
+                    <p><a href="/{{rest.certificate}}">Посмотреть сертификат</a></p>
+                    <p><a href="/{{rest.menu}}">Посмотреть меню</a></p>
+                    <form action="{% url 'favourite_restos' rest.id  %}" method="POST" alt="btnn">
+    {% csrf_token %}
+      {% if is_fav %}
+      <button type = "submit" name = "fav_id" value= "{{ rest.id }}" class="button-36">Сохранено</button>
+        {% else %}
+      <button type = "submit" name = "fav_id" value= "{{ rest.id }}" class="button-37">Сохранить</button>
+      {% endif %}
+  </form>
+                </div>
+            </section>
+
+            <center><iframe src={{rest.resto_karta}} width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></center>
+
+        </div>
+  </div>
+
+    <div class="testimonial-heading">
+            <span>Оставьте свой отзыв:</span>
+        </div>
+
+    <div class="testimonial-box-container">
+        <div class="testimonial-box">
+            <form action="{% url 'submit_review' rest.id %}" method="POST">
+					{% csrf_token %}
+                <span>@{{user.profile.user}}</span>
+					<div>
+						<!-- Rating stars -->
+						<div class="rate">
+							<input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10" title="5"></label>
+							<input type="radio" name="rating" id="rating9" value="4.5" required /><label for="rating9" title="4.5" class="half"></label>
+							<input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8" title="4"></label>
+							<input type="radio" name="rating" id="rating7" value="3.5" required /><label for="rating7" title="3.5" class="half"></label>
+							<input type="radio" name="rating" id="rating6" value="3" required /><label for="rating6" title="3"></label>
+							<input type="radio" name="rating" id="rating5" value="2.5" required /><label for="rating5" title="2.5" class="half"></label>
+							<input type="radio" name="rating" id="rating4" value="2" required /><label for="rating4" title="2"></label>
+							<input type="radio" name="rating" id="rating3" value="1.5" required /><label for="rating3" title="1.5" class="half"></label>
+							<input type="radio" name="rating" id="rating2" value="1" required /><label for="rating2" title="1"></label>
+							<input type="radio" name="rating" id="rating1" value="0.5" required /><label for="rating1" title="0.5" class="half"></label>
+						</div>
+                        <textarea name="review" rows="4" class="form-control" placeholder="Написать отзыв..." style="width: 100; height: 50;"></textarea>
+						<br>
+                        <input type="submit" value="Отправить" class="button-35">
+					</div>
+				</form>
+        </div>
+    </div>
+
+
+  <div class="testimonial-heading">
+            <span>Все отзывы({{rest.countReview}}):</span>
+        </div>
+{% for review in reviews %}
+  <div class="container">
+      <section id="testimonials">
+        <!--heading--->
+        <!--testimonials-box-container------>
+        <div class="testimonial-box-container">
+            <!--BOX-1-------------->
+            <div class="testimonial-box">
+                <!--top------------------------->
+                <div class="box-top">
+                    <!--profile----->
+                    <div class="profile">
+                        <!--img---->
+                        <div class="profile-img">
+                            <img src="{{review.user.profile.profile_img.url}}" />
+                        </div>
+                        <!--name-and-username-->
+                        <div class="name-user">
+                            <strong>@{{review.user}}</strong>
+                            <span>at {{review.created_at}}</span>
+                        </div>
+                    </div>
+                    <!--reviews------>
+                    <div class="rating-star">
+								<span>
+									<i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4 %}-o {% endif %}" aria-hidden="true"></i>
+									<i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5 %}-o {% endif %}" aria-hidden="true"></i>
+								</span>
+							</div>
+                </div>
+                <!--Comments---------------------------------------->
+                <div class="client-comment">
+                    <p>{{review.review}}</p>
+                </div>
+            </div>
+            </div>
+                    </section>
+                <div>
+{% endfor %}
+
+</body>
+
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <h3>Halal Restos</h3>
+
+				<p class="footer-links">
+					<a href="{% url 'home' %}" class="link-1">Главная</a>
+
+					<a href="{% url 'restos_all' %}">Рестораны</a>
+
+					<a href="{% url 'mosques' %}">Мечети</a>
+					<a href="#">О нас</a>
+				</p>
+
+				<p class="footer-company-name">Halal Restos © 2022</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>Нур-Султан</span>Казахстан</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+7-777-083-11-21</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:halal_restos@company.com">halal_restos@company.com</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>О проекте</span>
+            Halal restos - самый первый цифровой гид по Халяльным заведения в Казахстане.
+        </p>
+
+        <div class="footer-icons">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="https://instagram.com/anel.yah?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram"></i></a>
+            <a href="https://t.me/an3lya"><i class="fa fa-telegram"></i></a>
+        </div>
+    </div>
+</footer>
+<style>
+    .dropbtn {
+    background-color: #444444;
+    color: white;
+    padding: 16px;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #444444;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+container{
+    margin: 0px;
+    padding: 0px;
+    font-family: poppins;
+    box-sizing: border-box;
+}
+#testimonials{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:100%;
+}
+.testimonial-heading{
+    letter-spacing: 1px;
+    margin: 30px 0px;
+    margin-bottom: 1px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.testimonial-heading h1{
+    font-size: 2.2rem;
+    font-weight: 500;
+    background-color: #202020;
+    color: #ffffff;
+    padding: 10px 20px;
+}
+.testimonial-heading span{
+    font-size: 1.3rem;
+    color: #252525;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+textarea {
+  width: 790px;
+  height: 70px;
+}
+.testimonial-box-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width:100%;
+}
+.testimonial-box{
+    width:800px;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 15px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+.profile-img{
+    width:50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.profile-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.profile{
+    display: flex;
+    align-items: center;
+}
+.name-user{
+    display: flex;
+    flex-direction: column;
+}
+.name-user strong{
+    color: #3d3d3d;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+.name-user span{
+    color: #979797;
+    font-size: 0.8rem;
+}
+.reviews{
+    color: #f9d71c;
+}
+.box-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.client-comment p{
+    font-size: 0.9rem;
+    color: #4b4b4b;
+}
+.testimonial-box:hover{
+    transform: translateY(-10px);
+    transition: all ease 0.3s;
+}
+
+@media(max-width:1060px){
+    .testimonial-box{
+        width:45%;
+        padding: 10px;
+    }
+}
+@media(max-width:790px){
+    .testimonial-box{
+        width:100%;
+    }
+    .testimonial-heading h1{
+        font-size: 1.4rem;
+    }
+}
+@media(max-width:340px){
+    .box-top{
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .reviews{
+        margin-top: 10px;
+    }
+}
+::selection{
+    color: #ffffff;
+    background-color: #252525;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.show {display:block;}
+
+.footer-distributed{
+	background: #666;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	text-align: left;
+	font: bold 16px sans-serif;
+	padding: 55px 50px;
+}
+
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.footer-distributed .footer-left{
+	width: 40%;
+}
+
+.footer-distributed h3{
+	color:  #ffffff;
+	font: normal 36px 'Open Sans';
+	margin: 0;
+}
+
+.footer-distributed h3 span{
+	color:  lightseagreen;
+	font-size: 30px
+}
+
+.footer-distributed .footer-links{
+	color:  #ffffff;
+	margin: 20px 0 12px;
+	padding: 0;
+}
+
+.footer-distributed .footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+    font-weight:400;
+	text-decoration: none;
+	color:  inherit;
+}
+
+.footer-distributed .footer-company-name{
+	color:  #222;
+	font-size: 14px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.footer-distributed .footer-center{
+	width: 35%;
+}
+
+.footer-distributed .footer-center i{
+	background-color:  #33383b;
+	color: #ffffff;
+	font-size: 25px;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 42px;
+	margin: 10px 15px;
+	vertical-align: middle;
+}
+
+.footer-distributed .footer-center i.fa-envelope{
+	font-size: 17px;
+	line-height: 38px;
+}
+
+.footer-distributed .footer-center p{
+	display: inline-block;
+	color: #ffffff;
+    font-weight:400;
+	vertical-align: middle;
+	margin:0;
+}
+
+.footer-distributed .footer-center p span{
+	display:block;
+	font-weight: normal;
+	font-size:14px;
+	line-height:2;
+}
+
+.footer-distributed .footer-center p a{
+	color:  lightseagreen;
+	text-decoration: none;;
+}
+
+.footer-distributed .footer-links a:before {
+  content: "|";
+  font-weight:300;
+  font-size: 20px;
+  left: 0;
+  color: #fff;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.footer-distributed .footer-links .link-1:before {
+  content: none;
+}
+
+.footer-distributed .footer-right{
+	width: 20%;
+}
+
+.footer-distributed .footer-company-about{
+	line-height: 20px;
+	color:  #92999f;
+	font-size: 13px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.footer-distributed .footer-company-about span{
+	display: block;
+	color:  #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.footer-distributed .footer-icons{
+	margin-top: 25px;
+}
+
+.footer-distributed .footer-icons a{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	background-color:  #33383b;
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+
+	margin-right: 3px;
+	margin-bottom: 5px;
+}
+
+@media (max-width: 880px) {
+	.footer-distributed{
+		font: bold 14px sans-serif;
+	}
+
+	.footer-distributed .footer-left,
+	.footer-distributed .footer-center,
+	.footer-distributed .footer-right{
+		display: block;
+		width: 100%;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+
+	.footer-distributed .footer-center i{
+		margin-left: 0;
+	}
+}
+body {
+    margin: 0;
+    padding: 50;
+    font-family: Nunito;
+}
+
+body {
+    background-color: #EFEFEF;
+}
+
+header {
+    background-color: #444444;
+    height: 5em;
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    margin: auto 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about_us {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    align-items: left;
+}
+
+.button-35 {
+  align-items: center;
+  background-color: #88db8c;
+  border-radius: 12px;
+  box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1 1 auto;
+  font-family: Inter,sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s,-webkit-box-shadow .2s;
+  white-space: nowrap;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-35:hover {
+  box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+}
+
+.button-36 {
+  align-items: center;
+  background-color: black;
+  border-radius: 12px;
+  box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1 1 auto;
+  font-family: Inter,sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s,-webkit-box-shadow .2s;
+  white-space: nowrap;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-36:hover {
+  box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+}
+
+.button-37 {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1 1 auto;
+  font-family: Inter,sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s,-webkit-box-shadow .2s;
+  white-space: nowrap;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-37:hover {
+  box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+}
+
+a {
+    text-decoration: none;
+}
+#details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 90vh;
+    width: 85vw;
+    margin: 0 auto;
+}
+.content{
+    background: #EFEFEF;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.content h2{
+    position  : absolute;
+    top    : 125px;
+    left    : 610px;
+    font-size: 48px;
+    letter-spacing: 6px;
+    opacity: 0.9;
+}
+
+.content p{
+    padding-bottom: 25px;
+    font-size: 17px;
+    font-weight: 400;
+    opacity: 1.0;
+    width: 80%;
+    text-align: left;
+    margin: 0 auto;
+    line-height: 1.0;
+}
+
+    .content h5 {
+  position  : absolute;
+  top    : 80px;
+  left    : 163px;
+  text-align: center;
+  font-size: 40px;
+  color: #444444;
+}
+</style>
+<script>
+      function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
 <html>

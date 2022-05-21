@@ -1,4 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Avg, Count
 
 class Restaurants(models.Model):
     resto_id = models.IntegerField()
@@ -12,6 +14,25 @@ class Restaurants(models.Model):
     certificate = models.ImageField(upload_to='images/', null=True, verbose_name="certificate")
     menu = models.FileField(upload_to='files/', null=True)
     resto_photo = models.ImageField(upload_to='images/', null=True, verbose_name="photo")
+    resto_karta = models.CharField(max_length=5000, default='null')
+    favourite = models.ManyToManyField(User, related_name='favourite', blank=True)
+
+    def __str__(self) -> str:
+        return self.resto_name
+
+    def averageReview(self):
+        reviews = ReviewRating.objects.filter(resto=self).aggregate(average=Avg('rating'))
+        avg = 0
+        if reviews['average'] is not None:
+            avg = float(reviews['average'])
+        return avg
+
+    def countReview(self):
+        reviews = ReviewRating.objects.filter(resto=self).aggregate(count=Count('id'))
+        count = 0
+        if reviews['count'] is not None:
+            count = int(reviews['count'])
+        return count
 
 class Mosque(models.Model):
     mosque_name = models.CharField(max_length=100)
@@ -20,16 +41,14 @@ class Mosque(models.Model):
     mosque_contacts = models.CharField(max_length=100, default='null')
     mosque_photo = models.ImageField(upload_to='images/', null=True, verbose_name= "")
     mosque_time = models.CharField(max_length=100)
+    karta = models.CharField(max_length=5000, default='null')
 
-class User(models.Model):
-    user_fname = models.CharField(max_length=100)
-    user_lname = models.CharField(max_length=100)
-    user_email = models.CharField(max_length=255)
-    user_password = models.CharField(max_length=65)
+class ReviewRating(models.Model):
+    resto = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    review = models.TextField(max_length=500, blank=True)
+    rating = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
-class Reviews(models.Model):
-    user_id = models.IntegerField()
-    resto_id = models.IntegerField()
-    review = models.TextField(default='null')
-    rate = models.IntegerField()
-    review_time = models.TimeField()
+    def __str__(self):
+        return self.review

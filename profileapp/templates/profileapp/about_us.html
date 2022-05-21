@@ -4,22 +4,32 @@
 <html lang="en">
 
 <link rel="stylesheet" href="{% static 'css/about_us.css' %}">
+
 <header>
         <nav class="navbar">
-            <a href="{% url 'home'%}" class="logo">Halal Restos</a>
-			<a class="about_us" href="{% url 'restos_all' %}">
-                    <span class="O_nas">Рестики</span>
-                </a>
+            <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="/images/HalalRestos.png" width="250" height="60" class="d-inline-block align-top" alt="">
+            </a>
+            <a class="about_us" href="{% url 'restos_all' %}">
+                    <span class="O_nas">Рестораны</span>
+            </a>
             <a class="about_us" href="{% url 'mosques' %}">
                     <span class="O_nas">Мечети</span>
-                </a>
+            </a>
+            <a class="about_us" href="#">
+                    <span class="O_nas">Время намаза</span>
+            </a>
             <a class="about_us" href="#">
                     <span class="O_nas">О проекте</span>
-                </a>
-                <a class="profile-icon-link-container" href="{% url 'profile' %}">
-                    <img src="{% static 'images/default.svg' %}" alt="profile-icon">
-                    <span class="header-username">{{user}}</span>
-                </a>
+            </a>
+            <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">{{user.profile.name}} {{user.profile.last_name}}</button>
+                    <div id="myDropdown" class="dropdown-content">
+                    <a href="{% url 'profile' %}">Редактировать профиль</a>
+                    <a href="{% url 'post_favourite_list' %}">Сохранённые</a>
+                    <a href="{% url 'login' %}">Выход</a>
+                    </div>
+            </div>
         </nav>
 </header>
 
@@ -30,9 +40,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="main.css">
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <section>
+</head>
+<body>
+    <section>
             <div class = "image" >
                 <!-- image here -->
             </div>
@@ -42,13 +52,12 @@
                 <span><!-- line here --></span>
 
                 <p>Halal restos - самый первый цифровой гид по Халяльным заведения в Казахстане. Данный проект был разработан в рамках образовательной программы в стенах университета. Основной миссией данного проекта является предоставление качественной и достоверной информации о Халяльных заведениях и мечетях столицы. У нас Вы сможете ознакомиться с актуальными на данный момент «чистыми» заведениями, посмотреть необходимую информацию о них, сохранить в избранное и оставить отзыв. Изюминка нашей платформы - отметка наличия молельной(намазханы). В дополнение ко всему будут представлены мечети с актуальной информацией. </p>
-
             </div>
-        </section>
+    </section>
+</body>
+<header1> </header1>
 
-		<header1> </header1>
-
-    <footer class="footer-distributed">
+<footer class="footer-distributed">
 
 			<div class="footer-left">
 
@@ -99,11 +108,66 @@
 					<a href="#"><i class="fa fa-twitter"></i></a>
 					<a href="https://instagram.com/anel.yah?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram"></i></a>
 					<a href="https://t.me/an3lya"><i class="fa fa-telegram"></i></a>
-
 				</div>
 
 			</div>
+</footer>
+<style>
+.dropbtn {
+    background-color: #444444;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
 
-		</footer>
-    </body>
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #444444;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.show {display:block;}
+</style>
+  <script>
+      function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 </html>

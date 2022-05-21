@@ -3,4 +3,5 @@ from .models import *
 
 admin.site.register(Restaurants)
 admin.site.register(Mosque)
-admin.site.register(User)
+admin.site.register(ReviewRating)
+admin.site.unregister(User)

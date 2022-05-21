@@ -1,24 +1,467 @@
-{% extends "newsapp/layout.html"%}
-{%block page_title%} Search Results {%endblock%}
-{% block top_news %}
-<div class="top-news">
-  <div class="container">
+{% load static %}
 
+{{ '<' }}{{ '!DOCTYPE html>' }}
+<html lang="en">
 
-    {% for article in search_res%}
-    <div class="row">
-      <ol>
-        <li value="{{forloop.counter}}">
-          <a href="{% url 'newsapp:get_article_by_id' article.id %}">
-          {{article.article_name}}
-        </a>
-        </li>
-      </ol>
-  </div>
-      {% empty %}
-      {{empty_res}}
-      {%endfor%}
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  </div>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Libraries Stylesheet -->
+<!--    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">-->
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{%static 'css/style.css' %}" rel="stylesheet">
+
+    <title>Home</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+</head>
+
+<header>
+        <nav class="navbar">
+            <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="/images/HalalRestos.png" width="250" height="60" class="d-inline-block align-top" alt="">
+            </a>
+            <a class="about_us" href="{% url 'restos_all' %}">
+                    <span class="O_nas">Рестораны</span>
+            </a>
+            <a class="about_us" href="{% url 'mosques' %}">
+                    <span class="O_nas">Мечети</span>
+            </a>
+            <a class="about_us" href=#>
+                    <span class="O_nas">Время намаза</span>
+            </a>
+            <a class="about_us" href="{% url 'about_us' %}">
+                    <span class="O_nas">О проекте</span>
+            </a>
+            <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">{{user.profile.name}} {{user.profile.last_name}}</button>
+                    <div id="myDropdown" class="dropdown-content">
+                    <a href="{% url 'profile' %}">Редактировать профиль</a>
+                    <a href="{% url 'post_favourite_list' %}">Сохранённые</a>
+                    <a href="{% url 'login' %}">Выход</a>
+                    </div>
+            </div>
+        </nav>
+</header>
+<body>
+<div class = "content">
+      <h10>Мечети</h10>
 </div>
-{% endblock%}
+
+<div class="container1">
+      <form action="{% url 'search' %}" method="post" class="form">
+          {% csrf_token %}
+        <input type="text" name="search_field" placeholder="Поиск..." class="search-field" onkeyup="search()"/>
+        <button type="submit" class="search-button">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+</div>
+
+<div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            {% for mos in search_res %}
+            <div class="col-lg-4 col-md-6 pb-1">
+                <div class="cat-item d-flex flex-column border mb-4" style="padding: 25px; height: 400px; background-color:white; border-radius:25px;" >
+                    <a href="{% url 'mosque_detail' id=mos.id %}" class="cat-img position-relative overflow-hidden mb-3">
+                        <center><img class="img-fluid" src="{{mos.mosque_photo.url}}" alt="" style="height: 300px; border-radius: 10px;" ></center>
+                    </a>
+                    <h5 class="" style="font-weight: bold;"><center>{{mos.mosque_name}}</center></h5>
+                    <h5 class="" style="font-weight: normal; font-size:18px;"><center>{{mos.mosque_address}}</center></h5>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+
+<header1> </header1>
+</body>
+<footer class="footer-distributed">
+	    <div class="footer-left">
+            <h3>Halal Restos</h3>
+                <p class="footer-links">
+					<a href="{% url 'home' %}" class="link-1">Главная</a>
+					<a href="#">Рестораны</a>
+					<a href="{% url 'mosques' %}">Мечети</a>
+					<a href="{% url 'about_us' %}">О проекте</a>
+				</p>
+				<p class="footer-company-name">Halal Restos © 2022</p>
+        </div>
+
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>Нур-Султан,</span>Казахстан</p>
+            </div>
+
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+7-777-083-11-21</p>
+            </div>
+
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:support@company.com">halal_restos@company.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>О проекте</span>
+                Halal restos - самый первый цифровой гид по Халяльным заведения в Казахстане.
+            </p>
+
+            <div class="footer-icons">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="https://instagram.com/anel.yah?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram"></i></a>
+                <a href="https://t.me/an3lya"><i class="fa fa-telegram"></i></a>
+            </div>
+        </div>
+</footer>
+</body>
+<style>
+.content{
+    background: #EFEFEF;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content h10{
+    text-transform: uppercase;
+    position  : absolute;
+    top    : 120px;
+    left: 733px;
+    color: #444444;
+    font-size: 48px;
+    letter-spacing: 6px;
+    opacity: 0.9;
+}
+
+.container1 {
+  margin: 140px 650px auto;
+  width: 400px;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-field {
+  width: 100%;
+  padding: 10px 35px 10px 15px;
+  border: none;
+  border-radius: 100px;
+  outline: none;
+}
+
+.search-button {
+  background: transparent;
+  border: none;
+  outline: none;
+  margin-left: -33px;
+}
+
+.search-button img {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+
+.transparent75 {
+    filter: alpha(Opacity=45);
+    opacity: 0.45;
+}
+
+.dropbtn {
+    background-color: #444444;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #444444;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.show {display:block;}
+
+*, body {
+    margin: 0;
+    padding: 0;
+    font-family: Nunito;
+}
+
+body {
+    background-color: #EFEFEF;
+}
+
+header {
+    background-color: #444444;
+    height: 5em;
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    margin: auto 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 2em;
+    font-weight: semi-bold;
+    text-decoration: none;
+}
+
+.logo:hover {
+    color: white;
+}
+
+.about_us {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    align-items: left;
+}
+
+a { text-decoration: none; }
+
+.footer-distributed{
+	background: #666;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	text-align: left;
+	font: bold 16px sans-serif;
+	padding: 55px 50px;
+}
+
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.footer-distributed .footer-left{
+	width: 40%;
+}
+
+.footer-distributed h3{
+	color:  #ffffff;
+	font: normal 36px 'Open Sans';
+	margin: 0;
+}
+
+.footer-distributed h3 span{
+	color:  lightseagreen;
+	font-size: 30px
+}
+
+.footer-distributed .footer-links{
+	color:  #ffffff;
+	margin: 20px 0 12px;
+	padding: 0;
+}
+
+.footer-distributed .footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+    font-weight:400;
+	text-decoration: none;
+	color:  inherit;
+}
+
+.footer-distributed .footer-company-name{
+	color:  #222;
+	font-size: 14px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.footer-distributed .footer-center{
+	width: 35%;
+}
+
+.footer-distributed .footer-center i{
+	background-color:  #33383b;
+	color: #ffffff;
+	font-size: 25px;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 42px;
+	margin: 10px 15px;
+	vertical-align: middle;
+}
+
+.footer-distributed .footer-center i.fa-envelope{
+	font-size: 17px;
+	line-height: 38px;
+}
+
+.footer-distributed .footer-center p{
+	display: inline-block;
+	color: #ffffff;
+    font-weight:400;
+	vertical-align: middle;
+	margin:0;
+}
+
+.footer-distributed .footer-center p span{
+	display:block;
+	font-weight: normal;
+	font-size:14px;
+	line-height:2;
+}
+
+.footer-distributed .footer-center p a{
+	color:  lightseagreen;
+	text-decoration: none;;
+}
+
+.footer-distributed .footer-links a:before {
+  content: "|";
+  font-weight:300;
+  font-size: 20px;
+  left: 0;
+  color: #fff;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.footer-distributed .footer-links .link-1:before {
+  content: none;
+}
+
+.footer-distributed .footer-right{
+	width: 20%;
+}
+
+.footer-distributed .footer-company-about{
+	line-height: 20px;
+	color:  #92999f;
+	font-size: 13px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.footer-distributed .footer-company-about span{
+	display: block;
+	color:  #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.footer-distributed .footer-icons{
+	margin-top: 25px;
+}
+
+.footer-distributed .footer-icons a{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	background-color:  #33383b;
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+
+	margin-right: 3px;
+	margin-bottom: 5px;
+}
+
+@media (max-width: 880px) {
+	.footer-distributed{
+		font: bold 14px sans-serif;
+	}
+
+	.footer-distributed .footer-left,
+	.footer-distributed .footer-center,
+	.footer-distributed .footer-right{
+		display: block;
+		width: 100%;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+
+	.footer-distributed .footer-center i{
+		margin-left: 0;
+	}
+}
+</style>
+<script>
+    function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+</html>
