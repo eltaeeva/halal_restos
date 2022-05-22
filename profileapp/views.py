@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -13,7 +12,6 @@ from .forms import CreateUserForm, ProfileForm, ReviewForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-# Create your views here.
 
 @login_required(login_url = 'login')
 def index(request):
@@ -177,8 +175,7 @@ class SearchSuccessView(View):
             qs = qs | query
 
         search_res = Mosque.objects.filter(qs)
-        return render(request, "profileapp/search.html",
-                      {"search_res": search_res, "empty_res": "There is no mosque"})
+        return render(request, "profileapp/search.html", {"search_res": search_res, "empty_res": "There is no mosque"})
 
 class SearchView2(View):
     def post(self, request):
@@ -191,8 +188,7 @@ class SearchView2(View):
                               {"empty_res": "There is no mosque"})
         except Exception as e:
             print(e)
-            return render(request, "profileapp/searchh.html",
-                          {"empty_res": f"No mosque have been found by {request.POST.get('search_field')}"})
+            return render(request, "profileapp/searchh.html", {"empty_res": f"No mosque have been found by {request.POST.get('search_field')}"})
 
 class SearchSuccessView2(View):
     def get(self, request, text):
@@ -206,8 +202,7 @@ class SearchSuccessView2(View):
             qs = qs | query
 
         search_ress = Restaurants.objects.filter(qs)
-        return render(request, "profileapp/searchh.html",
-                      {"search_ress": search_ress, "empty_res": "There is no mosque"})
+        return render(request, "profileapp/searchh.html", {"search_ress": search_ress, "empty_res": "There is no mosque"})
 
 def submit_review(request, resto_id):
     url = request.META.get('HTTP_REFERER')
@@ -219,6 +214,7 @@ def submit_review(request, resto_id):
             form = ReviewForm(request.POST, instance=reviews)
             form.save()
             return redirect(url)
+
         except ReviewRating.DoesNotExist:
             form = ReviewForm(request.POST)
             if form.is_valid():
@@ -234,7 +230,6 @@ def bookings(request, resto_id):
     today = datetime.today().strftime('%Y-%m-%d')
     day = NamazTime.objects.get(date=today)
     if request.method == 'POST':
-        user_id = request.user.id
         phone_num = request.POST.get('phone_num')
         no_people = int(request.POST.get('no_people'))
         table_type = request.POST.get('table_type')
