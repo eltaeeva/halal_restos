@@ -52,3 +52,44 @@ class ReviewRating(models.Model):
 
     def __str__(self):
         return self.review
+
+class Resto_tables(models.Model):
+    resto = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
+    for2seaters_total = models.IntegerField()
+    for2seaters_remain = models.IntegerField()
+    for4seaters_total = models.IntegerField()
+    for4seaters_remain = models.IntegerField()
+
+
+class Book(models.Model):
+        BOOKED = 'B'
+        CANCELLED = 'C'
+
+        TICKET_STATUSES = ((BOOKED, 'Booked'),
+                           (CANCELLED, 'Cancelled'),)
+        user_full_name = models.CharField(max_length=300)
+        user_id = models.DecimalField(decimal_places=0, max_digits=2)
+        user_phone = models.CharField(max_length=300, default='87777777777')
+        resto_id = models.DecimalField(decimal_places=0, max_digits=2)
+        resto_name = models.CharField(max_length=30)
+        no_people = models.DecimalField(decimal_places=0, max_digits=2)
+        table_type = models.DecimalField(decimal_places=0, max_digits=2)
+        date = models.DateField()
+        time = models.TimeField()
+        status = models.CharField(choices=TICKET_STATUSES, default=BOOKED, max_length=20)
+
+class NamazTime(models.Model):
+    date = models.DateField()
+    fadjr = models.CharField(max_length=300)
+    vosxod = models.CharField(max_length=300)
+    zuhr = models.CharField(max_length=300)
+    asr = models.CharField(max_length=300)
+    magrib = models.CharField(max_length=300)
+    isha = models.CharField(max_length=300)
+
+    def countReview(self):
+        reviews = ReviewRating.objects.filter(resto=self).aggregate(count=Count('id'))
+        count = 0
+        if reviews['count'] is not None:
+            count = int(reviews['count'])
+        return count

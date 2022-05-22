@@ -44,9 +44,17 @@
             <a class="about_us" href="{% url 'mosques' %}">
                     <span class="O_nas">Мечети</span>
             </a>
-            <a class="about_us" href=#>
-                    <span class="O_nas">Время намаза</span>
-            </a>
+            <div class="dropdown2">
+        <button onclick="myFunction2()" class="dropbtn2">Время намаза</button>
+        <div id="myDropdown2" class="dropdown-content2" style="border-radius: 15px;">
+        <a>Фаджр: {{data.fadjr}}</a>
+        <a>Восход: {{data.vosxod}}</a>
+        <a>Зухр: {{data.zuhr}}</a>
+        <a>Аср: {{data.asr}}</a>
+        <a>Магриб: {{data.magrib}}</a>
+        <a>Иша: {{data.isha}}</a>
+        </div>
+</div>
             <a class="about_us" href="{% url 'about_us' %}">
                     <span class="O_nas">О проекте</span>
             </a>
@@ -55,6 +63,7 @@
                     <div id="myDropdown" class="dropdown-content">
                     <a href="{% url 'profile' %}">Редактировать профиль</a>
                     <a href="{% url 'post_favourite_list' %}">Сохранённые</a>
+                        <a href="{% url 'see_bookings' %}">Мои брони</a>
                     <a href="{% url 'login' %}">Выход</a>
                     </div>
             </div>
@@ -465,3 +474,54 @@ window.onclick = function(event) {
 }
 </script>
 </html>
+<style>
+.dropbtn2 {
+    background-color: #444444;
+    color: white;
+    padding: 16px;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+.dropbtn2:hover, .dropbtn2:focus {
+    background-color: #444444;
+}
+.dropdown2 {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content2 a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content2 a:hover {background-color: #ddd}
+.show {display:block;}
+</style>
+<script>
+      function myFunction2() {
+    document.getElementById("myDropdown2").classList.toggle("show");
+}
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn2')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content2");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>

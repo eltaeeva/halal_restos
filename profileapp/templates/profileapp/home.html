@@ -26,28 +26,34 @@
             <a class="about_us" href="{% url 'mosques' %}">
                     <span class="O_nas">Мечети</span>
             </a>
-            <a class="about_us" href=#>
-                    <span class="O_nas">Время намаза</span>
-            </a>
+
+<div class="dropdown2">
+        <button onclick="myFunction2()" class="dropbtn2">Время намаза</button>
+        <div id="myDropdown2" class="dropdown-content2" style="border-radius: 15px;">
+        <a>Фаджр: {{data.fadjr}}</a>
+        <a>Восход: {{data.vosxod}}</a>
+        <a>Зухр: {{data.zuhr}}</a>
+        <a>Аср: {{data.asr}}</a>
+        <a>Магриб: {{data.magrib}}</a>
+        <a>Иша: {{data.isha}}</a>
+        </div>
+</div>
             <a class="about_us" href="{% url 'about_us' %}">
                     <span class="O_nas">О проекте</span>
             </a>
             <div class="dropdown">
                     <button onclick="myFunction()" class="dropbtn">{{user.profile.name}} {{user.profile.last_name}}</button>
-                    <div id="myDropdown" class="dropdown-content">
+                    <div id="myDropdown" class="dropdown-content" style="border-radius: 15px;">
                     <a href="{% url 'profile' %}">Редактировать профиль</a>
                     <a href="{% url 'post_favourite_list' %}">Сохранённые</a>
+                    <a href="{% url 'see_bookings' %}">Мои брони</a>
                     <a href="{% url 'login' %}">Выход</a>
                     </div>
             </div>
         </nav>
 </header>
-<!--<div class="containerr">-->
-<!--  <img src="images/photo5408874963118700782.jpg" alt="Вттт" width="100%" class="transparent75">-->
-<!--  <button class="btn" href="{% url 'donations' %} ">Пожертвовать</button>-->
-<!--</div>-->
-<p><img src="images/photo5408874963118700782.jpg" alt="Вттт" width="100%" class="transparent75">
-</p>
+
+<p><img src="images/photo5408874963118700782.jpg" alt="Вттт" width="100%" class="transparent75"></p>
 
 <h2><b>Добро пожаловать!</b></h2>
 <p1 alt="slova">Halal Restos - твой халяльный гид по рестикам)</p1>
@@ -112,7 +118,7 @@ background: #faf378;
             </br>
         </p>
     <a class="restiki" href="{% url 'restos_all' %}">
-        <div class="restiki-perexod">Смотреть</div>
+        <div class="button-35">Смотреть</div>
     </a>
     </div>
 </section>
@@ -132,7 +138,7 @@ background: #faf378;
             <br>* и вся важная информация</br>
         </p>
     <a class="mosques" href="{% url 'mosques' %}">
-        <div class="mosque-perexod">Смотреть</div>
+        <div class="button-35">Смотреть</div>
     </a>
     </div>
     <div class = "image_mosq">
@@ -240,8 +246,7 @@ a {
 h2 {
 	position	: absolute;
 	top		: 350px;
-	left		: 0px;
-	width		: 100%;
+	left		: 510px;
 	text-align: center;
 	font-size: 70px;
 	color: #444444;
@@ -265,7 +270,9 @@ section{
     margin: 0 auto;
 }
 .image{
-    background: url("https://ltdfoto.ru/images/2022/05/05/BEZ-NAZVANIY-1920-1080PIKS.-1.png") center/cover no-repeat;
+    background: url("https://www.throughthefibrofog.com/wp-content/uploads/2019/09/restaurant-with-white-furniture.jpg") center/cover no-repeat;
+    border-radius: 15px;
+    box-shadow: 0px 28px 28px 0px rgba(0,0,0,0.2);
 }
 .content{
     background: #EFEFEF;
@@ -278,7 +285,7 @@ section{
     text-transform: uppercase;
     position	: absolute;
 	top		: 1050px;
-	left		: 360px;
+	left		: 1030px;
     font-size: 48px;
     letter-spacing: 6px;
     opacity: 0.9;
@@ -343,6 +350,8 @@ header3 {
 }
 .image_mosq{
     background: url("https://tengrinews.kz/userdata/images/u138/8a5a9c27297ef95096453171345f0f13.JPG") center/cover no-repeat;
+    border-radius: 15px;
+    box-shadow: 0px 28px 28px 0px rgba(0,0,0,0.2);
 }
 .content_mosq{
     background: #EFEFEF;
@@ -355,7 +364,7 @@ header3 {
     text-transform: uppercase;
     position	: absolute;
 	top		: 1850px;
-	left		: -360px;
+	left		: 365px;
     font-size: 48px;
     letter-spacing: 6px;
     opacity: 0.9;
@@ -388,6 +397,39 @@ header3 {
     font-weight: 600;
     cursor: pointer;
 }
+
+.button-35 {
+  align-items: center;
+  background-color: #f3f59a;
+  border-radius: 12px;
+  box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+  box-sizing: border-box;
+  color: #444444;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1 1 auto;
+  font-family: Inter,sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 1.3rem 2.3rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s,-webkit-box-shadow .2s;
+  white-space: nowrap;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-35:hover {
+  box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+}
+
 .transparent75 {
     filter: alpha(Opacity=45);
     opacity: 0.45;
@@ -621,3 +663,54 @@ window.onclick = function(event) {
 }
 </script>
 </html>
+<style>
+.dropbtn2 {
+    background-color: #444444;
+    color: white;
+    padding: 16px;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+.dropbtn2:hover, .dropbtn2:focus {
+    background-color: #444444;
+}
+.dropdown2 {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content2 a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content2 a:hover {background-color: #ddd}
+.show {display:block;}
+</style>
+<script>
+      function myFunction2() {
+    document.getElementById("myDropdown2").classList.toggle("show");
+}
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn2')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content2");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>

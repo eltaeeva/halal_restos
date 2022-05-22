@@ -20,4 +20,8 @@ urlpatterns = [
     path('favourites/', views.post_favourite_list, name='post_favourite_list'),
     path('submit_review/<int:resto_id>/', views.submit_review, name='submit_review'),
     path('donations/', views.donations, name='donations'),
+    path('reserv/<int:id>', views.reserv, name='reserv'),
+    path('bookings/<int:resto_id>', views.bookings, name="bookings"),
+    path('see_bookings/', views.see_bookings, name="see_bookings"),
+    path('canceling/<int:book_id>', views.cancelings, name="canceling"),
 ]
