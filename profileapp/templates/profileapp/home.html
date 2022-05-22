@@ -26,29 +26,28 @@
             <a class="about_us" href="{% url 'mosques' %}">
                     <span class="O_nas">Мечети</span>
             </a>
-
-<div class="dropdown2">
-        <button onclick="myFunction2()" class="dropbtn2">Время намаза</button>
-        <div id="myDropdown2" class="dropdown-content2" style="border-radius: 15px;">
-        <a>Фаджр: {{data.fadjr}}</a>
-        <a>Восход: {{data.vosxod}}</a>
-        <a>Зухр: {{data.zuhr}}</a>
-        <a>Аср: {{data.asr}}</a>
-        <a>Магриб: {{data.magrib}}</a>
-        <a>Иша: {{data.isha}}</a>
-        </div>
-</div>
+           <div class="dropdown2">
+               <button onclick="myFunction2()" class="dropbtn2">Время намаза</button>
+               <div id="myDropdown2" class="dropdown-content2" style="border-radius: 15px;">
+                   <a>Фаджр: {{data.fadjr}}</a>
+                   <a>Восход: {{data.vosxod}}</a>
+                   <a>Зухр: {{data.zuhr}}</a>
+                   <a>Аср: {{data.asr}}</a>
+                   <a>Магриб: {{data.magrib}}</a>
+                   <a>Иша: {{data.isha}}</a>
+               </div>
+           </div>
             <a class="about_us" href="{% url 'about_us' %}">
                     <span class="O_nas">О проекте</span>
             </a>
             <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">{{user.profile.name}} {{user.profile.last_name}}</button>
-                    <div id="myDropdown" class="dropdown-content" style="border-radius: 15px;">
+                <button onclick="myFunction()" class="dropbtn">{{user.profile.name}} {{user.profile.last_name}}</button>
+                <div id="myDropdown" class="dropdown-content" style="border-radius: 15px;">
                     <a href="{% url 'profile' %}">Редактировать профиль</a>
                     <a href="{% url 'post_favourite_list' %}">Сохранённые</a>
                     <a href="{% url 'see_bookings' %}">Мои брони</a>
                     <a href="{% url 'login' %}">Выход</a>
-                    </div>
+                </div>
             </div>
         </nav>
 </header>
@@ -56,10 +55,14 @@
 <p><img src="images/photo5408874963118700782.jpg" alt="Вттт" width="100%" class="transparent75"></p>
 
 <h2><b>Добро пожаловать!</b></h2>
+
 <p1 alt="slova">Halal Restos - твой халяльный гид по рестикам)</p1>
-<a href="{% url 'restos_all' %}" style="position: absolute; top: 520px;left: 780px;
-	text-align: center;
-background: #faf378;
+<a href="{% url 'restos_all' %}" style="
+  position: absolute;
+  top: 520px;
+  left: 780px;
+  text-align: center;
+  background: #faf378;
   border-radius: 999px;
   box-shadow: #d1c938 0 10px 20px -10px;
   box-sizing: border-box;
@@ -79,7 +82,10 @@ background: #faf378;
   word-break: break-word;
   border: 0;">Забронировать</a>
 
-<a href="{% url 'donations' %}" style="position: absolute; top: 730px;left: 785px;
+<a href="{% url 'donations' %}" style="
+  position: absolute;
+  top: 730px;
+  left: 785px;
   text-align: center;
   border-radius: 999px;
   box-sizing: border-box;
@@ -117,9 +123,9 @@ background: #faf378;
             <br>* меню</br>
             </br>
         </p>
-    <a class="restiki" href="{% url 'restos_all' %}">
-        <div class="button-35">Смотреть</div>
-    </a>
+        <a class="restiki" href="{% url 'restos_all' %}">
+            <div class="button-35">Смотреть</div>
+        </a>
     </div>
 </section>
 
@@ -137,14 +143,13 @@ background: #faf378;
             * контактные данные
             <br>* и вся важная информация</br>
         </p>
-    <a class="mosques" href="{% url 'mosques' %}">
-        <div class="button-35">Смотреть</div>
-    </a>
+        <a class="mosques" href="{% url 'mosques' %}">
+            <div class="button-35">Смотреть</div>
+        </a>
     </div>
     <div class = "image_mosq">
         <!-- image here -->
     </div>
-
 </section>
 
 <header4> </header4>
