@@ -319,11 +319,11 @@ def cancelings(request, book_id):
         return render(request, 'profileapp/answer.html', {'res': res, 'data': day})
 
     elif table_type == 4:
-        for4seaters_remain = Resto_tables.objects.get(resto_id=resto_id)
+        resto_table = Resto_tables.objects.get(resto_id=resto_id)
+        for4seaters_remain = resto_table.for4seaters_remain
         for4seaters_remain_canceled = for4seaters_remain + 1
         Resto_tables.objects.filter(resto_id=resto_id).update(for4seaters_remain=for4seaters_remain_canceled)
-        record = Book.objects.get(id=book_id)
-        record.delete()
+        Book.objects.filter(id=book_id).update(status='CANCELLED')
 
         res = 'Ваша бронь отменена'
         return render(request, 'profileapp/answer.html', {'res': res, 'data': day})
